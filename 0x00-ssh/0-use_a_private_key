@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Connection to Web Server
+
+ssh -i ~/.ssh/school ubuntu@54.83.188.32
