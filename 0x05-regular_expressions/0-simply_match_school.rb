@@ -1,2 +1,2 @@
 #!/usr/bin/env ruby
-ruby -e 'puts ARGV[0] =~ /School/' "$1"
+puts ARGV[0].scan(/hbt{2,5}n/).join
