@@ -1,2 +1,4 @@
 #!/usr/bin/env ruby
-puts ARGV[0].scan(/hbt+n/).join
+if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        print(re.search(r"hbt{2,5}n", sys.argv[1]).group())
