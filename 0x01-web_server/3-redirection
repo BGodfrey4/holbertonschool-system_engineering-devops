@@ -7,7 +7,7 @@ sudo service nginx start
 echo 'Hello World!' | sudo tee
 
 searchString="\tlocation / {"
-stringReplace="\tlocation /redirect_me {\n https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n\n\tlocation / {"
+stringReplace="\tlocation /redirect_me {\n https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\t}\n\n\tlocation / {"
 sudo sed -i "s@^$searchString@$stringReplace@" /etc/nginx/sites-available/default
 
 # line="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
