@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 # Configures a custom http response header
-sudo apt-get update -y
-sudo apt-get install nginx -y
-echo "Holberton School" > /var/www/html/index.nginx-debian.html
-echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
-new_string="server_name _;\n\trewrite ^\/redirect_me google.com permanent;"
-nstr1="\n\tadd_header X-Served-By \$hostname;"
-nstr2="\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}"
-sed -i "s/server_name _;/$new_string$nstr1$nstr2/" /etc/nginx/sites-enabled/default
-service nginx start
+sudo apt update
+sudo apt -y install nginx
+sudo chmod 777 /var/www/html/index.html
+echo 'Hello World' > /var/www/html/index.html
+sudo sed -i '/server_name _;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-enabled/default
+sudo touch /var/www/html/error404-page.html
+sudo chmod 777 /var/www/html/error404-page.html
+sudo echo "Ceci n'est pas une page" > /var/www/html/error404-page.html
+sudo sed -i '55i error_page 404 /error404-page.html;' /etc/nginx/sites-enabled/default
+sudo sed -i "/listen 80 default_server/a add_header X-Served-By '$HOSTNAME';" /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
