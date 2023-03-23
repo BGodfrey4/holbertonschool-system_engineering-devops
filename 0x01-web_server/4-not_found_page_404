@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-#  Install nginx on web-01 server
+# Configures NGINX
+sudo apt-get update -y
+sudo apt-get install nginx -y
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+new_string="server_name _;\n\trewrite ^\/redirect_me google.com permanent;"
+nstr2="\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}"
+sed -i "s/server_name _;/$new_string$nstr2/" /etc/nginx/sites-enabled/default
+service nginx start
 
-sudo apt -y update && sudo apt -y upgrade
-sudo apt -y install nginx
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-sudo touch /var/www/html/custom_404.html
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
-line="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}"
-sudo sed -i "27i $line" /etc/nginx/sites-available/default
-sudo /etc/init.d/nginx restart
