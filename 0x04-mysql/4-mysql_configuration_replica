@@ -16,9 +16,11 @@
 # * IMPORTANT: Additional settings that can override those from this file!
 #   The files must end with '.cnf', otherwise they'll be ignored.
 #
-[mysqld]
+
 !includedir /etc/mysql/conf.d/
 !includedir /etc/mysql/mysql.conf.d/
+# 4. Setup a Replica infrastructure using MySQL
+[mysqld]
 server-id = 2
 relay-log = /var/log/mysql/mysql-relay-bin.log
 log_bin = /var/log/mysql/mysql-bin.log
